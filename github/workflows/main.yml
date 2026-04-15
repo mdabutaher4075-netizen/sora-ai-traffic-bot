@@ -1,0 +1,24 @@
+name: Auto Traffic Bot
+on:
+  schedule:
+    - cron: '*/30 * * * *' # প্রতি ৩০ মিনিট পর পর এটি নিজে থেকে চলবে
+  workflow_dispatch: # আপনি চাইলে ম্যানুয়ালিও স্টার্ট করতে পারবেন
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.9'
+
+      - name: Install dependencies
+        run: |
+          pip install selenium webdriver-manager requests
+
+      - name: Run Bot
+        run: python bot.py
