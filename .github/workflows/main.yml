@@ -1,0 +1,19 @@
+name: Auto Traffic Bot
+on:
+  schedule:
+    - cron: '*/30 * * * *'
+  workflow_dispatch:
+
+jobs:
+  hit_job:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Setup Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.9'
+      - name: Install Tools
+        run: pip install selenium webdriver-manager requests
+      - name: Run Bot
+        run: python bot.py
